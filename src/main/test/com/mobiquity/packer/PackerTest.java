@@ -1,9 +1,6 @@
 package com.mobiquity.packer;
 
 import com.mobiquity.exception.APIException;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -38,13 +35,10 @@ public class PackerTest {
     }
 
     @Test
-    public void testPacker() {
-
+    public void testPacker_happyCase() {
         for ( int i = 0; i < inputLines.size(); i++ ) {
             try {
-
                 assertEquals( outputLines.get(i), Packer.pack(inputLines.get(i)) );
-
             } catch (APIException e) {
                 fail(e.getMessage());
             }

@@ -28,10 +28,11 @@ public class Parser {
         Matcher matcher = Pattern.compile("\\((.*?)\\)").matcher(record.get(1));
         while (matcher.find()) {
             String[] itemMetaData = matcher.group(1).split(",");
-            Item item = new Item(
-                    Integer.parseInt(itemMetaData[0]),
-                    Double.parseDouble(itemMetaData[1]),
-                    Integer.parseInt(itemMetaData[2].replace("€", "")));
+            Item item = Item.builder()
+                    .index(Integer.parseInt(itemMetaData[0]))
+                    .weight(Double.parseDouble(itemMetaData[1]))
+                    .value(Integer.parseInt(itemMetaData[2].replace("€", "")))
+                    .build();
             items.add(item);
         }
         return packageMetaData;
