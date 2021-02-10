@@ -21,7 +21,12 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class Packer {
 
-    static Logger LOG = Logger.getLogger(Packer.class.getName());
+    private final static Logger LOG = Logger.getLogger(Packer.class.getName());
+    private final static PackageKnapsackSolver solver;
+
+    static {
+        solver = new PackageKnapsackSolver();
+    }
 
     /**
      * A method which reads the CSV file and returns
@@ -34,7 +39,6 @@ public class Packer {
     public static String pack(String filePath) throws APIException {
         LOG.info(String.format("FileName %s. Reading records from CSV file", filePath));
         List<PackageMetaData> packageMetaData = readRecords(filePath);
-        PackageKnapsackSolver solver = new PackageKnapsackSolver();
         LOG.info("Solving for maximum value for each record in CSV file");
         List<Result> result = solvePackageKnapsack(solver, packageMetaData);
         LOG.info("Formatting result to String");
